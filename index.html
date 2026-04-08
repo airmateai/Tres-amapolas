@@ -1,1176 +1,448 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tres Amapolas — Bed & Breakfast · Bariloche, Patagonia</title>
-  <meta name="description" content="Tres Amapolas Bed & Breakfast en San Carlos de Bariloche, Patagonia Argentina. Desayuno artesanal, a 300m del Parque Nacional Nahuel Huapi." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tres Amapolas — Bed & Breakfast · Bariloche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1e5c38;
+  --green-mid: #2e8a55;
+  --green-light: #4aad72;
+  --dark: #0f2d1c;
+  --bg: #f5faf6;
+  --bg2: #edf5f0;
+  --cream: #fffdf8;
+  --text: #1a2e22;
+  --text-dim: rgba(26,46,34,0.65);
+  --white: #ffffff;
+  --radius: 16px;
+  --shadow: 0 8px 40px rgba(15,45,28,0.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
 
-    :root {
-      --bg:          #f5faf6;
-      --bg2:         #edf5f0;
-      --bg3:         #ffffff;
-      --amber:       #1e5c38;
-      --amber-light: #2e8a55;
-      --cream:       #0f2d1c;
-      --cream-dim:   rgba(15,45,28,0.62);
-      --cream-faint: rgba(30,92,56,0.07);
-      --border:      rgba(30,92,56,0.14);
-      --font-d: 'Playfair Display', serif;
-      --font-b: 'DM Sans', sans-serif;
-      --ease: cubic-bezier(0.25, 1, 0.5, 1);
-    }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5vw;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s}
+nav.scrolled{background:rgba(255,253,248,.96);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(15,45,28,.08)}
+.nav-brand img{height:48px;width:auto}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--white);letter-spacing:.02em;transition:opacity .2s}
+nav.scrolled .nav-links a{color:var(--text)}
+.nav-links a:hover{opacity:.7}
+.lang-btn{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:var(--white);padding:5px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;letter-spacing:.06em;transition:all .2s}
+nav.scrolled .lang-btn{border-color:var(--green);color:var(--green)}
+.lang-btn:hover{background:rgba(255,255,255,.15)}
+nav.scrolled .lang-btn:hover{background:var(--green);color:#fff}
 
-    html { scroll-behavior: smooth; }
+/* HERO */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url('https://lh3.googleusercontent.com/gps-cs-s/AHVAweo8Bj2ZnhlL4UhzZkk4cFnCVw_EZCI0Pd0vjfdJ3lrF18Z4P_-oUFlvCra4_sLuvNGkLcFWMzqeX0IZpHGK2OKZtSH7Ax7TZEqGdQgH_9DkTeRoLzaybPfb11JlB2sjWiTCpKNvz3nSqBQ=w1920-h1280-k-no');background-size:cover;background-position:center;transform:scale(1.05);transition:transform 8s ease}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,30,18,.45) 0%,rgba(10,30,18,.25) 50%,rgba(10,30,18,.6) 100%)}
+.hero:hover .hero-bg{transform:scale(1)}
+.hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:0 20px}
+.hero-logo{height:90px;width:auto;margin:0 auto 28px;filter:brightness(0) invert(1)}
+.hero-eyebrow{font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:16px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:400;line-height:1.1;margin-bottom:20px}
+.hero-title em{font-style:italic;color:#a8d5bc}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.78);max-width:480px;margin:0 auto 40px}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--green-mid);color:#fff;padding:14px 32px;border-radius:50px;font-weight:500;font-size:.95rem;transition:transform .2s,background .2s;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--green-light);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.hero-scroll span{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);animation:scrollLine 1.8s ease-in-out infinite}
+@keyframes scrollLine{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(.6);opacity:1}}
 
-    body {
-      background: var(--bg);
-      color: var(--cream);
-      font-family: var(--font-b);
-      font-weight: 300;
-      overflow-x: hidden;
-    }
+/* SECTIONS COMMON */
+section{padding:100px 5vw}
+.section-label{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green-mid);margin-bottom:12px;font-weight:500}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;line-height:1.2;color:var(--dark);margin-bottom:20px}
+.section-text{color:var(--text-dim);max-width:540px;font-size:1rem;line-height:1.75}
 
-    /* verde moderno overrides */
-    .nav { background: rgba(245,250,246,0); }
-    .nav.scrolled { background: rgba(245,250,246,0.96) !important; border-bottom: 1px solid var(--border); }
-    .nav-name, .nav-brand { color: var(--cream); }
-    .nav-links a { color: var(--cream-dim) !important; }
-    .nav-links a:hover { color: var(--amber-light) !important; }
-    .nav-cta { background: var(--amber) !important; color: #fff !important; }
-    .nav-cta:hover { background: var(--amber-light) !important; }
-    .nav-ham span { background: var(--cream); }
-    .hero-scroll { color: var(--cream-dim); }
-    .hero-scroll-line { background: var(--amber); }
-    .strip { background: var(--amber); border-color: rgba(255,255,255,0.15); }
-    .strip-item { border-color: rgba(255,255,255,0.2); }
-    .strip-num { color: #fff; }
-    .strip-label { color: rgba(255,255,255,0.72); }
-    .about-content { background: #fff; }
-    .about-feat { background: var(--cream-faint); border-color: var(--border); }
-    .about-feat p { color: var(--cream-dim); }
-    .about-feat-title { color: var(--amber); }
-    .about-quote { color: var(--cream-dim); border-color: var(--amber); }
-    .rooms { background: var(--bg2); }
-    .spaces-content { background: #fff; }
-    .spaces-item { border-color: var(--border); }
-    .spaces-item-title { color: var(--cream); }
-    .spaces-item-desc { color: var(--cream-dim); }
-    .balcony-full img { filter: brightness(.5); }
-    .amenities { background: #fff; }
-    .amenities-grid { border-color: var(--border); }
-    .amenity { border-color: var(--border); }
-    .amenity:hover { background: var(--cream-faint); }
-    .amenity-name { color: var(--cream); }
-    .amenity-desc { color: var(--cream-dim); }
-    .location-map { background: var(--bg2); }
-    .location-content { background: var(--bg2); }
-    .location-item { border-color: var(--border); }
-    .location-name { color: var(--cream); }
-    .location-sub { color: var(--cream-dim); }
-    .location-dist { color: var(--amber); }
-    .location-address { background: var(--cream-faint); border-color: var(--amber); }
-    .location-address p { color: var(--cream-dim); }
-    .location-address strong { color: var(--cream); }
-    .reservas-info { background: var(--bg2); }
-    .schedule { border-color: var(--border); }
-    .schedule-row { border-color: var(--border); }
-    .schedule-row span:first-child { color: var(--amber); }
-    .schedule-row span:last-child { color: var(--cream-dim); }
-    .contact-text h4 { color: var(--cream); }
-    .contact-text p, .contact-text a { color: var(--cream-dim); }
-    .reservas-platforms { background: var(--amber); }
-    .reservas-platforms .eyebrow { color: #a8d5bc !important; }
-    .reservas-platforms .h2 { color: #ffffff !important; }
-    .reservas-platforms .h2 em { color: #b8e8cc !important; font-style:italic; }
-    .platform-link { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); }
-    .platform-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.7); transform: translateX(6px); }
-    .platform-text h4 { color: #ffffff !important; }
-    .platform-text p { color: rgba(255,255,255,0.72) !important; }
-    .platform-arrow { color: rgba(255,255,255,0.85) !important; }
-    .footer { background: #0f2d1c !important; border-color: rgba(255,255,255,0.08) !important; }
-    .footer-top { border-color: rgba(255,255,255,0.08) !important; }
-    .footer-brand-name { color: rgba(255,255,255,0.85) !important; }
-    .footer-brand-name small { color: #7ec99a !important; }
-    .footer-tagline { color: rgba(255,255,255,0.55) !important; }
-    .footer-social a { border-color: rgba(255,255,255,0.15) !important; color: rgba(255,255,255,0.5) !important; }
-    .footer-social a:hover { border-color: #7ec99a !important; color: #7ec99a !important; }
-    .footer-col h5 { color: #7ec99a !important; }
-    .footer-col a { color: rgba(255,255,255,0.55) !important; }
-    .footer-col a:hover { color: #b3e4c2 !important; }
-    .footer-col li { color: rgba(255,255,255,0.55) !important; }
-    .footer-bottom { border-color: rgba(255,255,255,0.08) !important; }
-    .footer-copy { color: rgba(255,255,255,0.3) !important; }
-    .footer-legal a { color: rgba(255,255,255,0.3) !important; }
-    .footer-legal a:hover { color: #7ec99a !important; }
-    .float-btn { background: var(--amber); color: #fff; box-shadow: 0 8px 32px rgba(30,92,56,0.35); }
-    .float-btn:hover { background: var(--amber-light); }
-    .rule-line { background: var(--amber); }
-    .rule-dot { background: var(--amber); }
-    .eyebrow { color: var(--amber-light); }
-    .h2 em { color: var(--amber-light); }
-    ::-webkit-scrollbar-thumb { background: var(--amber); }
+/* ABOUT */
+.about{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img-wrap{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4}
+.about-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.about-img-wrap:hover img{transform:scale(1.04)}
+.about-badge{position:absolute;bottom:24px;right:-20px;background:var(--green);color:#fff;border-radius:12px;padding:18px 22px;text-align:center;box-shadow:var(--shadow)}
+.about-badge strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;line-height:1}
+.about-badge span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.feat-item{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text-dim)}
+.feat-icon{width:32px;height:32px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
+/* ROOMS */
+.rooms{background:var(--bg)}
+.rooms-header{text-align:center;margin-bottom:60px}
+.rooms-header .section-text{margin:0 auto}
+.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.room-card{border-radius:var(--radius);overflow:hidden;background:var(--cream);box-shadow:0 4px 20px rgba(15,45,28,.07);transition:transform .3s,box-shadow .3s;cursor:pointer}
+.room-card:first-child{grid-column:span 2}
+.room-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.room-img{aspect-ratio:16/10;overflow:hidden}
+.room-card:first-child .room-img{aspect-ratio:16/9}
+.room-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.room-card:hover .room-img img{transform:scale(1.05)}
+.room-info{padding:20px 22px}
+.room-info h3{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:6px;color:var(--dark)}
+.room-info p{font-size:.83rem;color:var(--text-dim);line-height:1.5}
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--amber); border-radius: 2px; }
+/* DESAYUNO */
+.desayuno{background:var(--dark);padding:100px 5vw}
+.desayuno-header{text-align:center;margin-bottom:60px}
+.desayuno-header .section-label{color:#7ec99a}
+.desayuno-header .section-title{color:#fff}
+.desayuno-header .section-text{color:rgba(255,255,255,.6);margin:0 auto}
+.desayuno-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.desayuno-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:32px 24px;text-align:center;transition:background .3s,transform .3s}
+.desayuno-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+.desayuno-card .icon{font-size:2.2rem;margin-bottom:16px}
+.desayuno-card h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:10px}
+.desayuno-card p{font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.6}
 
-    /* ── NAV ── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.6rem 3rem;
-      transition: background .5s, padding .4s, backdrop-filter .5s;
-    }
-    .nav.scrolled {
-      background: rgba(22,18,15,0.92);
-      backdrop-filter: blur(16px);
-      padding: 1rem 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-brand {
-      display: flex; align-items: center; gap: .9rem;
-    }
-    .nav-brand img {
-      height: 46px;
-      transition: height .3s;
-    }
-    .nav.scrolled .nav-brand img { height: 36px; }
-    .nav-name {
-      font-family: var(--font-d);
-      font-size: .95rem; letter-spacing: .15em;
-      color: var(--cream); line-height: 1.3;
-    }
-    .nav-name small {
-      display: block; font-family: var(--font-b);
-      font-size: .52rem; letter-spacing: .38em;
-      text-transform: uppercase; color: var(--amber-light);
-      font-weight: 400; margin-top: 1px;
-    }
-    .nav-links {
-      display: flex; gap: 2.5rem; list-style: none;
-    }
-    .nav-links a {
-      font-size: .68rem; letter-spacing: .22em;
-      text-transform: uppercase; color: var(--cream-dim);
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--amber-light); }
-    .nav-cta {
-      background: var(--amber) !important;
-      color: var(--bg) !important;
-      padding: .5rem 1.4rem;
-      font-weight: 500 !important;
-      transition: background .2s !important;
-    }
-    .nav-cta:hover { background: var(--amber-light) !important; }
-    .nav-ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .nav-ham span { display: block; width: 22px; height: 1px; background: var(--cream); transition: .3s; }
-    .lang-btn {
-      background: transparent; border: 1px solid var(--border);
-      color: var(--cream); font-family: var(--font-b);
-      font-size: .62rem; font-weight: 500; letter-spacing: .18em;
-      padding: .4rem .9rem; cursor: pointer; transition: all .25s;
-      margin-right: .5rem;
-    }
-    .lang-btn:hover { background: var(--amber); color: #fff; border-color: var(--amber); }
+/* ENTORNO */
+.entorno{background:var(--bg2);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.entorno-img{border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10}
+.entorno-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.entorno-img:hover img{transform:scale(1.04)}
+.entorno-attractions{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.attr-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--cream);border-radius:10px;font-size:.88rem;color:var(--text-dim)}
+.attr-icon{font-size:1.2rem;flex-shrink:0}
 
-    /* ── HERO ── */
-    .hero {
-      height: 100vh; min-height: 680px;
-      display: grid; grid-template-columns: 1fr 1fr;
-      position: relative;
-    }
-    .hero-left {
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 6rem 4rem 6rem 3rem;
-      position: relative; z-index: 2;
-    }
-    .hero-right {
-      position: relative; overflow: hidden;
-    }
-    .hero-right img {
-      width: 100%; height: 100%; object-fit: cover;
-      object-position: center;
-      filter: brightness(.85);
-      transform: scale(1.04);
-      transition: transform 8s var(--ease);
-    }
-    .hero-right img.loaded { transform: scale(1); }
-    .hero-right::before {
-      content: ''; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 40%);
-    }
-    .hero-tag {
-      font-size: .62rem; letter-spacing: .45em;
-      text-transform: uppercase; color: var(--amber-light);
-      margin-bottom: 1.8rem;
-    }
-    .hero-logo {
-      width: 120px; margin-bottom: 2rem;
-    }
-    .hero-h1 {
-      font-family: var(--font-d);
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
-      font-weight: 400; line-height: 1.0;
-      margin-bottom: 1rem;
-    }
-    .hero-h1 em { font-style: italic; color: var(--amber-light); }
-    .hero-desc {
-      font-size: .9rem; color: var(--cream-dim);
-      line-height: 1.8; max-width: 420px; margin-bottom: 3rem;
-    }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+/* FULLWIDTH */
+.fullwidth{position:relative;height:420px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.fullwidth-bg{position:absolute;inset:0;background-image:url('https://lh3.googleusercontent.com/gps-cs-s/AHVAweo8Bj2ZnhlL4UhzZkk4cFnCVw_EZCI0Pd0vjfdJ3lrF18Z4P_-oUFlvCra4_sLuvNGkLcFWMzqeX0IZpHGK2OKZtSH7Ax7TZEqGdQgH_9DkTeRoLzaybPfb11JlB2sjWiTCpKNvz3nSqBQ=w1920-h1280-k-no');background-size:cover;background-position:center;background-attachment:fixed}
+.fullwidth-bg::after{content:'';position:absolute;inset:0;background:rgba(10,30,18,.55)}
+.fullwidth-text{position:relative;z-index:2;text-align:center;color:#fff;padding:0 20px}
+.fullwidth-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:400;margin-bottom:16px}
+.fullwidth-text p{color:rgba(255,255,255,.72);font-size:1rem;max-width:500px;margin:0 auto}
 
-    .btn {
-      display: inline-block;
-      font-family: var(--font-b); font-size: .68rem;
-      font-weight: 500; letter-spacing: .2em;
-      text-transform: uppercase; padding: .9rem 2.2rem;
-      transition: all .3s var(--ease); cursor: pointer; border: none;
-    }
-    .btn-amber { background: var(--amber); color: var(--bg); }
-    .btn-amber:hover { background: var(--amber-light); transform: translateY(-2px); }
-    .btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--border); }
-    .btn-ghost:hover { border-color: var(--amber); color: var(--amber-light); }
+/* RESERVAS */
+.reservas{background:var(--bg);display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:480px;border-radius:24px;overflow:hidden;margin:0 5vw 80px;box-shadow:var(--shadow)}
+.reservas-info{padding:70px 60px;background:var(--cream)}
+.reservas-info .section-title{margin-bottom:16px}
+.reservas-info .section-text{margin-bottom:36px}
+.contact-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.contact-list li{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--text-dim)}
+.contact-list .icon{font-size:1.1rem;flex-shrink:0}
+.reservas-platforms{padding:70px 60px;display:flex;flex-direction:column;justify-content:center;gap:24px}
+.platform-link{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:22px 24px;transition:background .2s,transform .2s;cursor:pointer}
+.platform-link:hover{background:rgba(255,255,255,.2);transform:translateX(4px)}
+.platform-link .p-icon{font-size:1.6rem;flex-shrink:0}
+.platform-link .p-text strong{display:block;font-size:1rem;margin-bottom:2px}
+.platform-link .p-text span{font-size:.78rem;opacity:.65}
+.platform-link .p-arrow{margin-left:auto;font-size:1.1rem;opacity:.6}
 
-    .hero-scroll {
-      position: absolute; bottom: 2rem; left: 3rem;
-      display: flex; align-items: center; gap: .8rem;
-      font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--cream-dim); animation: bob 2.5s ease-in-out infinite;
-    }
-    .hero-scroll-line { width: 40px; height: 1px; background: var(--amber); }
-    @keyframes bob { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+/* FOOTER */
+.footer{background:#0f2d1c !important;color:#fff;padding:70px 5vw 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand img{height:52px;width:auto;margin-bottom:20px;filter:brightness(0) invert(1)}
+.footer-brand p{font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.55) !important}
+.footer-col h5{font-family:'Playfair Display',serif;font-size:1rem;color:#7ec99a !important;margin-bottom:18px;font-weight:400}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:.85rem;color:rgba(255,255,255,.5) !important;transition:color .2s}
+.footer-col a:hover{color:#fff !important}
+.footer-col li{font-size:.85rem;color:rgba(255,255,255,.5) !important}
+.footer-divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:28px}
+.footer-copy{text-align:center;font-size:.78rem;color:rgba(255,255,255,.28) !important}
 
-    /* ── SHARED ── */
-    .eyebrow {
-      font-size: .6rem; letter-spacing: .42em;
-      text-transform: uppercase; color: var(--amber);
-      margin-bottom: .8rem; font-weight: 400;
-    }
-    .h2 {
-      font-family: var(--font-d);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 400; line-height: 1.15;
-      color: var(--cream);
-    }
-    .h2 em { font-style: italic; color: var(--amber-light); }
-    .body-text {
-      font-size: .88rem; color: var(--cream-dim);
-      line-height: 1.85; font-weight: 300;
-    }
-    .rule {
-      display: flex; align-items: center; gap: .8rem;
-      margin: 1.4rem 0;
-    }
-    .rule-line { flex: 0 0 36px; height: 1px; background: var(--amber); opacity: .5; }
-    .rule-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--amber); }
+/* REVEAL ANIMATIONS */
+.reveal,.reveal-r{opacity:0;transition:opacity .7s ease,transform .7s ease}
+.reveal{transform:translateY(30px)}
+.reveal-r{transform:translateX(30px)}
+.revealed{opacity:1;transform:none}
 
-    /* ── NUMBERS STRIP ── */
-    .strip {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .strip-item {
-      padding: 2.5rem 2rem; text-align: center;
-      border-right: 1px solid var(--border);
-    }
-    .strip-item:last-child { border-right: none; }
-    .strip-num {
-      font-family: var(--font-d); font-size: 2.8rem;
-      color: var(--amber); display: block; line-height: 1;
-    }
-    .strip-label {
-      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--cream-dim); margin-top: .6rem;
-    }
-
-    /* ── ABOUT ── */
-    .about {
-      display: grid; grid-template-columns: 1fr 1fr;
-      min-height: 85vh;
-    }
-    .about-img {
-      position: relative; overflow: hidden;
-    }
-    .about-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 7s var(--ease);
-    }
-    .about-img:hover img { transform: scale(1.04); }
-    .about-content {
-      background: var(--bg2);
-      padding: 7rem 5rem 7rem 5.5rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .about-quote {
-      font-family: var(--font-d); font-style: italic;
-      font-size: 1.35rem; line-height: 1.6;
-      color: var(--cream-dim); border-left: 2px solid var(--amber);
-      padding-left: 1.5rem; margin: 2rem 0;
-    }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1.2rem; margin-top: 2.5rem;
-    }
-    .about-feat {
-      background: var(--cream-faint);
-      padding: 1.2rem; border: 1px solid var(--border);
-      transition: border-color .25s;
-    }
-    .about-feat:hover { border-color: var(--amber); }
-    .about-feat-title {
-      font-size: .78rem; font-weight: 500; color: var(--amber-light);
-      margin-bottom: .3rem; letter-spacing: .05em;
-    }
-    .about-feat p { font-size: .76rem; color: var(--cream-dim); line-height: 1.5; }
-
-    /* ── ROOMS ── */
-    .rooms { padding: 8rem 3rem; background: var(--bg); }
-    .rooms-header {
-      display: flex; align-items: flex-end;
-      justify-content: space-between; margin-bottom: 4rem;
-      max-width: 1300px; margin-left: auto; margin-right: auto;
-    }
-    .rooms-header-left { max-width: 480px; }
-    .rooms-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 2px;
-      max-width: 1300px; margin: 0 auto;
-    }
-    .room {
-      position: relative; overflow: hidden; cursor: pointer;
-      background: var(--bg3);
-    }
-    .room:first-child { grid-column: span 2; }
-    .room img {
-      width: 100%; height: 400px; object-fit: cover;
-      display: block; transition: transform .7s var(--ease), filter .5s;
-      filter: brightness(.9);
-    }
-    .room:first-child img { height: 500px; }
-    .room:hover img { transform: scale(1.05); filter: brightness(.65); }
-    .room-label {
-      position: absolute; top: 1.2rem; left: 1.2rem;
-      font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--amber-light); background: rgba(22,18,15,.75);
-      padding: .35rem .8rem; backdrop-filter: blur(6px);
-    }
-    .room-info {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 2rem 1.8rem 1.8rem;
-      background: linear-gradient(to top, rgba(22,18,15,.95) 0%, transparent 100%);
-      transform: translateY(12px); opacity: 0;
-      transition: transform .45s var(--ease), opacity .45s;
-    }
-    .room:hover .room-info { transform: translateY(0); opacity: 1; }
-    .room-name {
-      font-family: var(--font-d); font-size: 1.5rem; color: var(--cream);
-      margin-bottom: .4rem;
-    }
-    .room-amenities { font-size: .72rem; color: var(--cream-dim); }
-    .room-price {
-      margin-top: .8rem;
-      font-family: var(--font-d); font-size: 1.6rem; color: var(--amber);
-    }
-    .room-price span { font-size: .68rem; font-family: var(--font-b); color: var(--cream-dim); }
-
-    /* ── SPACES ── */
-    .spaces {
-      display: grid; grid-template-columns: 1fr 1fr;
-      min-height: 75vh;
-    }
-    .spaces-img { position: relative; overflow: hidden; }
-    .spaces-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(.82);
-      transition: transform 7s var(--ease);
-    }
-    .spaces-img:hover img { transform: scale(1.04); }
-    .spaces-img-tag {
-      position: absolute; bottom: 2rem; right: 2rem;
-      background: var(--amber); color: var(--bg);
-      font-family: var(--font-d); font-style: italic;
-      font-size: .95rem; padding: 1rem 1.4rem;
-    }
-    .spaces-content {
-      background: var(--bg3);
-      padding: 6rem 5rem; display: flex;
-      flex-direction: column; justify-content: center;
-    }
-    .spaces-list { margin-top: 2.5rem; }
-    .spaces-item {
-      display: flex; align-items: center; gap: 1.2rem;
-      padding: 1.2rem 0; border-bottom: 1px solid var(--border);
-    }
-    .spaces-item:first-child { border-top: 1px solid var(--border); }
-    .spaces-icon { font-size: 1.2rem; flex-shrink: 0; width: 28px; text-align: center; }
-    .spaces-item-title { font-size: .83rem; color: var(--cream); font-weight: 400; }
-    .spaces-item-desc { font-size: .72rem; color: var(--cream-dim); margin-top: 1px; }
-
-    /* ── BALCONY FULL ── */
-    .balcony-full {
-      position: relative; height: 60vh; overflow: hidden;
-    }
-    .balcony-full img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(.55);
-    }
-    .balcony-full-content {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 2rem;
-    }
-    .balcony-full-content .h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-    .balcony-full-content .body-text { max-width: 560px; margin-top: 1rem; }
-
-    /* ── AMENITIES ── */
-    .amenities { padding: 7rem 3rem; background: var(--bg2); }
-    .amenities-header {
-      text-align: center; max-width: 520px;
-      margin: 0 auto 4rem;
-    }
-    .amenities-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; max-width: 1100px; margin: 0 auto;
-      border: 1px solid var(--border);
-    }
-    .amenity {
-      padding: 2.5rem 2rem; text-align: center;
-      border-right: 1px solid var(--border);
-      transition: background .3s;
-    }
-    .amenity:last-child { border-right: none; }
-    .amenity:hover { background: var(--cream-faint); }
-    .amenity-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
-    .amenity-name {
-      font-family: var(--font-d); font-size: 1rem;
-      color: var(--cream); margin-bottom: .4rem;
-    }
-    .amenity-desc { font-size: .75rem; color: var(--cream-dim); line-height: 1.55; }
-
-    /* ── LOCATION ── */
-    .location { display: grid; grid-template-columns: 1fr 1fr; }
-    .location-map {
-      position: relative; min-height: 520px;
-      background: var(--bg3); overflow: hidden;
-    }
-    .location-map iframe {
-      width: 100%; height: 100%; border: none;
-      filter: grayscale(1) invert(1) hue-rotate(180deg) brightness(.7) contrast(1.1);
-    }
-    .location-content {
-      background: var(--bg3); padding: 6rem 4.5rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .location-items { margin-top: 2.5rem; }
-    .location-item {
-      display: flex; gap: 1.5rem; align-items: center;
-      padding: 1.1rem 0; border-bottom: 1px solid var(--border);
-    }
-    .location-item:first-child { border-top: 1px solid var(--border); }
-    .location-dist {
-      font-family: var(--font-d); font-size: 1.1rem;
-      color: var(--amber); min-width: 65px; text-align: right; flex-shrink: 0;
-    }
-    .location-name { font-size: .83rem; color: var(--cream); font-weight: 400; }
-    .location-sub { font-size: .72rem; color: var(--cream-dim); }
-    .location-address {
-      margin-top: 2.5rem; padding: 1.4rem;
-      border-left: 2px solid var(--amber);
-      background: var(--cream-faint);
-    }
-    .location-address p { font-size: .8rem; color: var(--cream-dim); line-height: 1.75; }
-    .location-address strong { color: var(--cream); font-weight: 500; }
-
-    /* ── RESERVAS ── */
-    .reservas { display: grid; grid-template-columns: 1fr 1fr; }
-    .reservas-info {
-      background: var(--bg2); padding: 7rem 5.5rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .schedule {
-      margin-top: 3rem; border: 1px solid var(--border);
-    }
-    .schedule-row {
-      display: flex; justify-content: space-between;
-      padding: 1rem 1.4rem; border-bottom: 1px solid var(--border);
-      font-size: .8rem;
-    }
-    .schedule-row:last-child { border-bottom: none; }
-    .schedule-row span:first-child { color: var(--amber-light); font-weight: 400; }
-    .schedule-row span:last-child { color: var(--cream-dim); }
-    .contact-items { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
-    .contact-icon { font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
-    .contact-text h4 { font-size: .82rem; color: var(--cream); font-weight: 500; margin-bottom: .25rem; }
-    .contact-text p, .contact-text a {
-      font-size: .78rem; color: var(--cream-dim); line-height: 1.6;
-    }
-    .contact-text a { border-bottom: 1px solid rgba(200,129,58,.4); transition: color .2s, border-color .2s; }
-    .contact-text a:hover { color: var(--amber-light); border-color: var(--amber); }
-
-    .reservas-platforms {
-      background: var(--bg3); padding: 7rem 5.5rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .platform-link {
-      display: flex; align-items: center; gap: 1.5rem;
-      padding: 1.6rem; border: 1px solid var(--border);
-      margin-bottom: .8rem; transition: all .3s var(--ease);
-      text-decoration: none;
-    }
-    .platform-link:hover {
-      background: var(--cream-faint);
-      border-color: var(--amber);
-      transform: translateX(6px);
-    }
-    .platform-logo {
-      padding: .55rem 1rem; border-radius: 3px;
-      flex-shrink: 0; font-weight: 700; font-size: .85rem;
-      letter-spacing: .02em;
-    }
-    .platform-text h4 {
-      font-family: var(--font-d); font-size: 1.05rem;
-      color: var(--cream); margin-bottom: .2rem;
-    }
-    .platform-text p { font-size: .72rem; color: var(--cream-dim); }
-    .platform-arrow { margin-left: auto; color: var(--amber); font-size: 1.1rem; }
-
-    /* ── FOOTER ── */
-    .footer {
-      background: #0f2d1c;
-      padding: 5rem 3rem 2.5rem;
-      border-top: 1px solid var(--border);
-    }
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem; padding-bottom: 4rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .footer-brand-logo {
-      display: flex; align-items: center; gap: .9rem; margin-bottom: 1.4rem;
-    }
-    .footer-brand-logo img {
-      height: 48px; filter: brightness(0) invert(1) opacity(0.7);
-    }
-    .footer-brand-name {
-      font-family: var(--font-d); color: var(--cream);
-      opacity: .8; font-size: 1rem;
-    }
-    .footer-brand-name small {
-      display: block; font-family: var(--font-b);
-      font-size: .5rem; letter-spacing: .35em;
-      text-transform: uppercase; color: var(--amber); margin-top: 2px;
-    }
-    .footer-tagline {
-      font-size: .82rem; color: var(--cream-dim);
-      line-height: 1.75; max-width: 280px;
-      font-family: var(--font-d); font-style: italic;
-    }
-    .footer-social { display: flex; gap: .6rem; margin-top: 2rem; }
-    .footer-social a {
-      width: 34px; height: 34px; border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .75rem; color: var(--cream-dim);
-      transition: border-color .2s, color .2s;
-    }
-    .footer-social a:hover { border-color: var(--amber); color: var(--amber); }
-    .footer-col h5 {
-      font-size: .58rem; letter-spacing: .32em; text-transform: uppercase;
-      color: var(--amber); margin-bottom: 1.4rem; font-weight: 500;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: .7rem; }
-    .footer-col a { font-size: .78rem; color: var(--cream-dim); transition: color .2s; }
-    .footer-col a:hover { color: var(--amber-light); }
-    .footer-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 2rem;
-    }
-    .footer-copy { font-size: .68rem; color: rgba(240,232,219,.25); }
-    .footer-legal { display: flex; gap: 2rem; }
-    .footer-legal a { font-size: .68rem; color: rgba(240,232,219,.25); transition: color .2s; }
-    .footer-legal a:hover { color: var(--amber); }
-
-    /* ── FLOAT BTN ── */
-    .float-btn {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
-      background: var(--amber); color: var(--bg);
-      padding: .9rem 1.6rem;
-      font-family: var(--font-b); font-size: .65rem;
-      font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
-      box-shadow: 0 8px 32px rgba(200,129,58,.4);
-      transform: translateY(80px); opacity: 0;
-      transition: transform .5s var(--ease), opacity .5s, background .2s;
-    }
-    .float-btn.show { transform: translateY(0); opacity: 1; }
-    .float-btn:hover { background: var(--amber-light); }
-
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-    .reveal.on { opacity: 1; transform: none; }
-    .reveal-l { opacity: 0; transform: translateX(-36px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-    .reveal-l.on { opacity: 1; transform: none; }
-    .reveal-r { opacity: 0; transform: translateX(36px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-    .reveal-r.on { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      .hero-left { padding: 8rem 2rem 5rem; }
-      .about { grid-template-columns: 1fr; }
-      .about-content { padding: 4rem 2rem; }
-      .about-img { min-height: 50vw; }
-      .spaces { grid-template-columns: 1fr; }
-      .spaces-img { min-height: 350px; }
-      .spaces-content { padding: 4rem 2rem; }
-      .location { grid-template-columns: 1fr; }
-      .location-map { min-height: 350px; }
-      .location-content { padding: 4rem 2rem; }
-      .reservas { grid-template-columns: 1fr; }
-      .reservas-info { padding: 5rem 2rem; }
-      .reservas-platforms { padding: 5rem 2rem; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .amenities-grid { grid-template-columns: repeat(2, 1fr); }
-      .rooms-grid { grid-template-columns: 1fr 1fr; }
-      .rooms-grid .room:first-child { grid-column: span 2; }
-      .rooms-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    }
-    @media (max-width: 768px) {
-      #desayuno [style*="grid-template-columns:repeat(4"] { grid-template-columns: 1fr 1fr !important; }
-      #desayuno [style*="padding:0 3rem"] { padding: 0 1rem !important; }
-      #desayuno [style*="padding:5rem 2rem 3rem"] { padding: 3.5rem 1.5rem 2rem !important; }
-      #desayuno img { height: 260px !important; }
-    }
-    @media (max-width: 640px) {
-      .nav { padding: 1rem 1.2rem; }
-      .nav.scrolled { padding: .8rem 1.2rem; }
-      .nav-links { display: none; }
-      .nav-ham { display: flex; }
-      .strip { grid-template-columns: 1fr 1fr; }
-      .strip-item { border-bottom: 1px solid var(--border); }
-      .strip-item:nth-child(2n) { border-right: none; }
-      .rooms { padding: 5rem 1rem; }
-      .rooms-grid { grid-template-columns: 1fr; }
-      .rooms-grid .room:first-child { grid-column: span 1; }
-      .amenities-grid { grid-template-columns: 1fr 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer { padding: 3rem 1.2rem 2rem; }
-      .footer-bottom { flex-direction: column; gap: .8rem; text-align: center; }
-      .about-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about,.entorno{grid-template-columns:1fr;gap:40px}
+  .rooms-grid{grid-template-columns:1fr 1fr}
+  .room-card:first-child{grid-column:span 2}
+  .desayuno-cards{grid-template-columns:1fr 1fr}
+  .reservas{grid-template-columns:1fr;margin:0 0 0}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .about-badge{right:16px}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .rooms-grid{grid-template-columns:1fr}
+  .room-card:first-child{grid-column:span 1}
+  .desayuno-cards{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .reservas-info,.reservas-platforms{padding:40px 28px}
+}
+</style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav" id="nav">
-  <a href="#" class="nav-brand">
-    <img src="../cf4611b5-51c9-4fa1-b4a5-7b64b416d479-removebg-preview.png" alt="Tres Amapolas" />
-    <div class="nav-name">Tres Amapolas <small>Bed &amp; Breakfast</small></div>
-  </a>
+<nav id="mainNav">
+  <a href="#" class="nav-brand"><img src="logo.png" alt="Tres Amapolas"></a>
   <ul class="nav-links">
     <li><a href="#nosotros" data-es="Nosotros" data-en="About">Nosotros</a></li>
     <li><a href="#habitaciones" data-es="Habitaciones" data-en="Rooms">Habitaciones</a></li>
-    <li><a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a></li>
-    <li><a href="#ubicacion" data-es="Ubicación" data-en="Location">Ubicación</a></li>
-    <li><a href="#reservas" class="nav-cta" data-es="Reservar" data-en="Book now">Reservar</a></li>
+    <li><a href="#desayuno" data-es="Desayuno" data-en="Breakfast">Desayuno</a></li>
+    <li><a href="#entorno" data-es="Entorno" data-en="Surroundings">Entorno</a></li>
+    <li><a href="#reservas" data-es="Reservar" data-en="Book Now">Reservar</a></li>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
   </ul>
-  <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
-  <div class="nav-ham" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-tag">San Carlos de Bariloche · Patagonia, Argentina</p>
-    <img class="hero-logo"
-         src="../cf4611b5-51c9-4fa1-b4a5-7b64b416d479-removebg-preview.png"
-         alt="Tres Amapolas" />
-    <h1 class="hero-h1">Tres<br /><em>Amapolas</em></h1>
-    <p class="hero-desc">Un refugio alpino en el corazón de la Patagonia. Nueve habitaciones con historia, desayuno artesanal y el Parque Nacional Nahuel Huapi a 300 metros.</p>
-    <div class="hero-btns">
-      <a href="#reservas" class="btn btn-amber">Reservar ahora</a>
-      <a href="#nosotros" class="btn btn-ghost">Conocer más</a>
-    </div>
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <img src="logo.png" alt="Tres Amapolas" class="hero-logo">
+    <p class="hero-eyebrow" data-es="San Carlos de Bariloche · Patagonia" data-en="San Carlos de Bariloche · Patagonia">San Carlos de Bariloche · Patagonia</p>
+    <h1 class="hero-title" data-es="Un refugio <em>íntimo</em><br>en el corazón andino" data-en="An <em>intimate</em> refuge<br>in the Andean heart">Un refugio <em>íntimo</em><br>en el corazón andino</h1>
+    <p class="hero-sub" data-es="Bed &amp; Breakfast boutique rodeado de bosques, montañas y el lago Nahuel Huapi." data-en="Boutique Bed &amp; Breakfast surrounded by forests, mountains and Lake Nahuel Huapi.">Bed &amp; Breakfast boutique rodeado de bosques, montañas y el lago Nahuel Huapi.</p>
+    <a href="#reservas" class="hero-cta" data-es="Reservar ahora" data-en="Book Now">Reservar ahora</a>
   </div>
-  <div class="hero-right">
-    <img id="heroImg"
-         src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweo8Bj2ZnhlL4UhzZkk4cFnCVw_EZCI0Pd0vjfdJ3lrF18Z4P_-oUFlvCra4_sLuvNGkLcFWMzqeX0IZpHGK2OKZtSH7Ax7TZEqGdQgH_9DkTeRoLzaybPfb11JlB2sjWiTCpKNvz3nSqBQ=w1200-h900-k-no"
-         alt="Tres Amapolas exterior" />
-  </div>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>Descubrir</span>
-  </div>
+  <div class="hero-scroll"><span></span></div>
 </section>
-
 
 <!-- ABOUT -->
 <section class="about" id="nosotros">
-  <div class="about-img reveal-l">
-    <img src="https://lh3.googleusercontent.com/p/AF1QipPnuyH-0Yl8jdibrZUy6hwsXiXYGkdzPDVUJ1jl=w900-h1200-k-no"
-         alt="Terraza y jardín de Tres Amapolas" />
+  <div class="about-img-wrap reveal">
+    <img src="https://lh3.googleusercontent.com/p/AF1QipPnuyH-0Yl8jdibrZUy6hwsXiXYGkdzPDVUJ1jl=w900-h1200-k-no" alt="Tres Amapolas terraza" loading="lazy">
+    <div class="about-badge">
+      <strong>B&amp;B</strong>
+      <span data-es="Boutique" data-en="Boutique">Boutique</span>
+    </div>
   </div>
-  <div class="about-content reveal-r">
-    <p class="eyebrow">Nuestra historia</p>
-    <h2 class="h2">Un chalé alpino<br /><em>único</em> en Bariloche</h2>
-    <div class="rule"><div class="rule-line"></div><div class="rule-dot"></div></div>
-    <p class="body-text">
-      Tres Amapolas Bed &amp; Breakfast nació del deseo de compartir la belleza natural de la Patagonia argentina desde un espacio íntimo y cálido. Nuestra propiedad combina la arquitectura de chalé típica de Bariloche con el confort moderno, rodeada de bosques nativos y a pasos del Parque Nacional Nahuel Huapi.
-    </p>
-    <blockquote class="about-quote">
-      "Cada rincón de Tres Amapolas fue pensado para que te sientas en casa, lejos de casa."
-    </blockquote>
-    <div class="about-grid">
-      <div class="about-feat">
-        <div class="about-feat-title">🌿 Entorno natural</div>
-        <p>A 300m del Parque Nacional Nahuel Huapi, en plena Patagonia andina.</p>
-      </div>
-      <div class="about-feat">
-        <div class="about-feat-title">☕ Desayuno incluido</div>
-        <p>Continental artesanal cada mañana con productos regionales.</p>
-      </div>
-      <div class="about-feat">
-        <div class="about-feat-title">🏔️ Vistas únicas</div>
-        <p>Habitaciones con balcón y vistas al jardín y al entorno andino.</p>
-      </div>
-      <div class="about-feat">
-        <div class="about-feat-title">🤝 Trato personal</div>
-        <p>Atención personalizada para que cada estadía sea memorable.</p>
-      </div>
+  <div class="reveal-r">
+    <p class="section-label" data-es="Nuestra historia" data-en="Our story">Nuestra historia</p>
+    <h2 class="section-title" data-es="Donde la Patagonia<br>te recibe en casa" data-en="Where Patagonia<br>welcomes you home">Donde la Patagonia<br>te recibe en casa</h2>
+    <p class="section-text" data-es="Tres Amapolas es un bed &amp; breakfast con alma propia, enclavado entre los cerros y el lago de Bariloche. Cada rincón fue diseñado para que te sientas como en casa, con el calor de la hospitalidad andina y la magia de la Patagonia a tu alrededor." data-en="Tres Amapolas is a bed &amp; breakfast with its own soul, nestled between the hills and the lake of Bariloche. Every corner was designed to make you feel at home, with the warmth of Andean hospitality and the magic of Patagonia around you.">Tres Amapolas es un bed &amp; breakfast con alma propia, enclavado entre los cerros y el lago de Bariloche. Cada rincón fue diseñado para que te sientas como en casa, con el calor de la hospitalidad andina y la magia de la Patagonia a tu alrededor.</p>
+    <div class="about-features">
+      <div class="feat-item"><div class="feat-icon">🌿</div><span data-es="Entorno natural" data-en="Natural surroundings">Entorno natural</span></div>
+      <div class="feat-item"><div class="feat-icon">🍳</div><span data-es="Desayuno incluido" data-en="Breakfast included">Desayuno incluido</span></div>
+      <div class="feat-item"><div class="feat-icon">🏔️</div><span data-es="Vistas a la montaña" data-en="Mountain views">Vistas a la montaña</span></div>
+      <div class="feat-item"><div class="feat-icon">🛏️</div><span data-es="Habitaciones únicas" data-en="Unique rooms">Habitaciones únicas</span></div>
+      <div class="feat-item"><div class="feat-icon">🔥</div><span data-es="Ambiente acogedor" data-en="Cozy atmosphere">Ambiente acogedor</span></div>
+      <div class="feat-item"><div class="feat-icon">📍</div><span data-es="Ubicación privilegiada" data-en="Prime location">Ubicación privilegiada</span></div>
     </div>
   </div>
 </section>
 
-<!-- HABITACIONES -->
+<!-- ROOMS -->
 <section class="rooms" id="habitaciones">
   <div class="rooms-header reveal">
-    <div class="rooms-header-left">
-      <p class="eyebrow">Alojamiento</p>
-      <h2 class="h2">Nuestras <em>habitaciones</em></h2>
-    </div>
-    <a href="#reservas" class="btn btn-ghost">Ver disponibilidad →</a>
+    <p class="section-label" data-es="Nuestros espacios" data-en="Our spaces">Nuestros espacios</p>
+    <h2 class="section-title" data-es="Habitaciones con carácter" data-en="Rooms with character">Habitaciones con carácter</h2>
+    <p class="section-text" data-es="Cada habitación tiene su propia personalidad, diseñada para ofrecerte confort y estilo en plena naturaleza patagónica." data-en="Each room has its own personality, designed to offer you comfort and style in the heart of Patagonian nature.">Cada habitación tiene su propia personalidad, diseñada para ofrecerte confort y estilo en plena naturaleza patagónica.</p>
   </div>
-
-  <div class="rooms-grid reveal" style="grid-template-columns:repeat(3,1fr); grid-template-rows:auto auto;">
-    <!-- 1: Habitación grande madera oscura, sillones rojos (featured) -->
-    <div class="room" style="grid-column:span 2">
-      <span class="room-label">Habitación especial</span>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/648074201.jpg?k=0ae61262becca3f58666d9633f350372ceafa790b9198fc3ef6c13fc9311e10b&o="
-           alt="Habitación ática con vigas" style="height:520px" />
+  <div class="rooms-grid">
+    <div class="room-card reveal">
+      <div class="room-img">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/648074201.jpg" alt="Suite Ática" loading="lazy">
+      </div>
       <div class="room-info">
-        <div class="room-name">Suite Ática</div>
-        <div class="room-amenities">Vigas de madera · Parquet · Sillones · Vista jardín</div>
-        <div class="room-price">Desde $70 <span>USD / noche</span></div>
+        <h3 data-es="Suite Ática con Vigas" data-en="Attic Suite with Beams">Suite Ática con Vigas</h3>
+        <p data-es="Espacio amplio y luminoso con techos de vigas, vista panorámica y decoración en madera natural." data-en="Spacious and bright space with beam ceilings, panoramic views and natural wood decor.">Espacio amplio y luminoso con techos de vigas, vista panorámica y decoración en madera natural.</p>
       </div>
     </div>
-    <!-- 2: Habitación con techo ático, flores hortensia -->
-    <div class="room">
-      <span class="room-label">Habitación ática</span>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/816704890.jpg?k=bcf79f227ea9245fc63abbcd81cab628f483b6bc371f3ba32fcd8e988916b3e2&o="
-           alt="Habitación ática con hortensias" style="height:520px" />
+    <div class="room-card reveal">
+      <div class="room-img">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/816704890.jpg" alt="Ática Hortensias" loading="lazy">
+      </div>
       <div class="room-info">
-        <div class="room-name">Ática con Jardín</div>
-        <div class="room-amenities">Techo de madera · Balcón · Detalles florales</div>
-        <div class="room-price">Desde $70 <span>USD / noche</span></div>
+        <h3 data-es="Ática Hortensias" data-en="Hydrangea Attic">Ática Hortensias</h3>
+        <p data-es="Encantadora habitación abuhardillada con flores de temporada y vistas al jardín." data-en="Charming attic room with seasonal flowers and garden views.">Encantadora habitación abuhardillada con flores de temporada y vistas al jardín.</p>
       </div>
     </div>
-    <!-- 3: Twin clásica madera oscura, sillones rojos -->
-    <div class="room">
-      <span class="room-label">Habitación twin</span>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/648061620.jpg?k=ff4be42a5acde5b200e256fce0ae122b57c7151d5bc8e256698f70528cb5f8f8&o="
-           alt="Habitación twin madera" />
+    <div class="room-card reveal">
+      <div class="room-img">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/648061620.jpg" alt="Twin Clásica" loading="lazy">
+      </div>
       <div class="room-info">
-        <div class="room-name">Twin Clásica</div>
-        <div class="room-amenities">2 camas · Madera · Sillones · Ventanas jardín</div>
-        <div class="room-price">Desde $70 <span>USD / noche</span></div>
+        <h3 data-es="Twin Clásica Madera" data-en="Classic Wood Twin">Twin Clásica Madera</h3>
+        <p data-es="Habitación doble en madera oscura de estilo serrano, cálida y acogedora." data-en="Double room in dark mountain-style wood, warm and welcoming.">Habitación doble en madera oscura de estilo serrano, cálida y acogedora.</p>
       </div>
     </div>
-    <!-- 4: Doble con vista a montañas, cortinas flores -->
-    <div class="room">
-      <span class="room-label">Vista serrana</span>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/816704737.jpg?k=a96c734f9b84c93e3974c08fec3f0a33ab3a7e4d48ee050ebce1e76a58d95a9f&o="
-           alt="Habitación con vista a montañas" />
+    <div class="room-card reveal">
+      <div class="room-img">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/816704737.jpg" alt="Doble Vista Serrana" loading="lazy">
+      </div>
       <div class="room-info">
-        <div class="room-name">Doble Vista Serrana</div>
-        <div class="room-amenities">Vistas a montañas y bosques · Cortinas florales</div>
-        <div class="room-price">Desde $70 <span>USD / noche</span></div>
+        <h3 data-es="Doble Vista Serrana" data-en="Mountain View Double">Doble Vista Serrana</h3>
+        <p data-es="Perfecta para disfrutar del amanecer entre los cerros desde la comodidad de tu cama." data-en="Perfect to enjoy sunrise among the hills from the comfort of your bed.">Perfecta para disfrutar del amanecer entre los cerros desde la comodidad de tu cama.</p>
       </div>
     </div>
-    <!-- 5: Twin con techo abuhardillado, lámpara vintage -->
-    <div class="room">
-      <span class="room-label">Habitación doble</span>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/816704874.jpg?k=be622f82eed2a93c032f6f515f12eccbe6e5f80fc982c2f07762dd0b4540abca&o="
-           alt="Habitación twin abuhardillada" />
+    <div class="room-card reveal">
+      <div class="room-img">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/816704874.jpg" alt="Twin Abuhardillada" loading="lazy">
+      </div>
       <div class="room-info">
-        <div class="room-name">Twin Abuhardillada</div>
-        <div class="room-amenities">Techo inclinado · Lámpara vintage · Balcón</div>
-        <div class="room-price">Desde $70 <span>USD / noche</span></div>
+        <h3 data-es="Twin Abuhardillada" data-en="Attic Twin Room">Twin Abuhardillada</h3>
+        <p data-es="Dos camas individuales bajo el tejado con luz natural y ambiente íntimo." data-en="Two single beds under the roof with natural light and intimate ambiance.">Dos camas individuales bajo el tejado con luz natural y ambiente íntimo.</p>
       </div>
     </div>
-    <!-- 6: Doble clásica paredes blancas, jardín -->
-    <div class="room">
-      <span class="room-label">Habitación clásica</span>
-      <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/648074216.jpg?k=c83462dd14e21795939b78970e1f0eeaa3e39f71b39823afc5b897450d667bb3&o="
-           alt="Habitación doble clásica" />
+    <div class="room-card reveal">
+      <div class="room-img">
+        <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/648074216.jpg" alt="Doble Clásica" loading="lazy">
+      </div>
       <div class="room-info">
-        <div class="room-name">Doble Clásica</div>
-        <div class="room-amenities">2 camas · Paredes blancas · Vista al jardín</div>
-        <div class="room-price">Desde $70 <span>USD / noche</span></div>
+        <h3 data-es="Doble Clásica Blanca" data-en="Classic White Double">Doble Clásica Blanca</h3>
+        <p data-es="Habitación luminosa en tonos blancos y naturales, elegante y tranquila." data-en="Bright room in white and natural tones, elegant and peaceful.">Habitación luminosa en tonos blancos y naturales, elegante y tranquila.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ESPACIOS — foto exterior en full -->
-<div class="balcony-full reveal">
-  <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweo8Bj2ZnhlL4UhzZkk4cFnCVw_EZCI0Pd0vjfdJ3lrF18Z4P_-oUFlvCra4_sLuvNGkLcFWMzqeX0IZpHGK2OKZtSH7Ax7TZEqGdQgH_9DkTeRoLzaybPfb11JlB2sjWiTCpKNvz3nSqBQ=w1920-h1280-k-no"
-       alt="Tres Amapolas exterior" />
-  <div class="balcony-full-content">
-    <p class="eyebrow" style="color:var(--amber-light)">La propiedad</p>
-    <h2 class="h2" style="font-size:clamp(2.5rem,5vw,4.5rem)">Arquitectura<br /><em>patagónica auténtica</em></h2>
-    <p class="body-text" style="max-width:500px;margin-top:1.2rem;color:rgba(240,232,219,.75)">
-      Construida con piedra y madera local, Tres Amapolas es un chalé de montaña que respira la esencia de Bariloche.
-    </p>
+<!-- DESAYUNO -->
+<section class="desayuno" id="desayuno">
+  <div class="desayuno-header reveal">
+    <p class="section-label" data-es="Cada mañana" data-en="Every morning">Cada mañana</p>
+    <h2 class="section-title" data-es="El desayuno que mereces" data-en="The breakfast you deserve">El desayuno que mereces</h2>
+    <p class="section-text" data-es="Comenzá el día con un desayuno casero y abundante, preparado con productos locales y mucho cariño. Incluido en tu estadía." data-en="Start your day with a hearty homemade breakfast, prepared with local products and lots of love. Included in your stay.">Comenzá el día con un desayuno casero y abundante, preparado con productos locales y mucho cariño. Incluido en tu estadía.</p>
+  </div>
+  <div class="desayuno-cards">
+    <div class="desayuno-card reveal">
+      <div class="icon">🥐</div>
+      <h4 data-es="Panadería artesanal" data-en="Artisan bakery">Panadería artesanal</h4>
+      <p data-es="Medialunas, facturas y pan casero recién horneados cada mañana." data-en="Croissants, pastries and homemade bread freshly baked every morning.">Medialunas, facturas y pan casero recién horneados cada mañana.</p>
+    </div>
+    <div class="desayuno-card reveal">
+      <div class="icon">🍓</div>
+      <h4 data-es="Frutas frescas" data-en="Fresh fruits">Frutas frescas</h4>
+      <p data-es="Frutas de temporada, mermeladas y dulces regionales de producción local." data-en="Seasonal fruits, jams and regional preserves from local production.">Frutas de temporada, mermeladas y dulces regionales de producción local.</p>
+    </div>
+    <div class="desayuno-card reveal">
+      <div class="icon">🧀</div>
+      <h4 data-es="Tabla de fiambres" data-en="Charcuterie board">Tabla de fiambres</h4>
+      <p data-es="Quesos y embutidos artesanales de la región patagónica." data-en="Artisan cheeses and cold cuts from the Patagonian region.">Quesos y embutidos artesanales de la región patagónica.</p>
+    </div>
+    <div class="desayuno-card reveal">
+      <div class="icon">☕</div>
+      <h4 data-es="Bebidas calientes" data-en="Hot beverages">Bebidas calientes</h4>
+      <p data-es="Café de especialidad, té, mate y chocolate caliente para empezar el día." data-en="Specialty coffee, tea, mate and hot chocolate to start the day.">Café de especialidad, té, mate y chocolate caliente para empezar el día.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ENTORNO -->
+<section class="entorno" id="entorno">
+  <div class="reveal">
+    <p class="section-label" data-es="La Patagonia te espera" data-en="Patagonia awaits you">La Patagonia te espera</p>
+    <h2 class="section-title" data-es="Naturaleza en<br>estado puro" data-en="Nature in its<br>purest form">Naturaleza en<br>estado puro</h2>
+    <p class="section-text" data-es="A minutos del centro de Bariloche, rodeado de lagos, montañas y bosques de lenga. La aventura y la tranquilidad conviven en perfecta armonía." data-en="Minutes from downtown Bariloche, surrounded by lakes, mountains and lenga forests. Adventure and tranquility coexist in perfect harmony.">A minutos del centro de Bariloche, rodeado de lagos, montañas y bosques de lenga. La aventura y la tranquilidad conviven en perfecta armonía.</p>
+    <div class="entorno-attractions">
+      <div class="attr-item"><span class="attr-icon">🏔️</span><span data-es="Cerro Catedral — esquí y trekking" data-en="Cerro Catedral — skiing and trekking">Cerro Catedral — esquí y trekking</span></div>
+      <div class="attr-item"><span class="attr-icon">🚣</span><span data-es="Lago Nahuel Huapi — navegación y playas" data-en="Lake Nahuel Huapi — navigation and beaches">Lago Nahuel Huapi — navegación y playas</span></div>
+      <div class="attr-item"><span class="attr-icon">🌲</span><span data-es="Parque Nacional Nahuel Huapi" data-en="Nahuel Huapi National Park">Parque Nacional Nahuel Huapi</span></div>
+      <div class="attr-item"><span class="attr-icon">🍫</span><span data-es="Centro de Bariloche — chocolate y gastronomía" data-en="Bariloche center — chocolate and gastronomy">Centro de Bariloche — chocolate y gastronomía</span></div>
+    </div>
+  </div>
+  <div class="entorno-img reveal-r">
+    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweo8Bj2ZnhlL4UhzZkk4cFnCVw_EZCI0Pd0vjfdJ3lrF18Z4P_-oUFlvCra4_sLuvNGkLcFWMzqeX0IZpHGK2OKZtSH7Ax7TZEqGdQgH_9DkTeRoLzaybPfb11JlB2sjWiTCpKNvz3nSqBQ=w1920-h1280-k-no" alt="Bariloche landscape" loading="lazy">
+  </div>
+</section>
+
+<!-- FULLWIDTH -->
+<div class="fullwidth">
+  <div class="fullwidth-bg"></div>
+  <div class="fullwidth-text reveal">
+    <h2 data-es="Despertá con los Andes frente a ti" data-en="Wake up with the Andes before you">Despertá con los Andes frente a ti</h2>
+    <p data-es="Cada día en Tres Amapolas es una nueva razón para enamorarse de la Patagonia." data-en="Every day at Tres Amapolas is a new reason to fall in love with Patagonia.">Cada día en Tres Amapolas es una nueva razón para enamorarse de la Patagonia.</p>
   </div>
 </div>
 
-<!-- DESAYUNO — nuevo diseño -->
-<section id="desayuno" style="background:#0f2d1c; overflow:hidden;">
-  <!-- cabecera centrada -->
-  <div class="reveal" style="text-align:center; padding:5rem 2rem 3rem;">
-    <p class="eyebrow" style="color:#7ec99a;" data-es="Gastronomía" data-en="Food & Drink">Gastronomía</p>
-    <h2 class="h2" style="color:#fff; font-size:clamp(2.2rem,4vw,3.5rem);" data-es="El desayuno de <em>cada mañana</em>" data-en="Breakfast every <em>morning</em>">El desayuno de <em style="color:#7ec99a">cada mañana</em></h2>
-    <p style="font-size:.9rem; color:rgba(255,255,255,.6); max-width:540px; margin:1.2rem auto 0; font-weight:300; line-height:1.8;" data-es="Incluido en todas las habitaciones. Productos artesanales de la región preparados cada mañana en nuestro comedor con chimenea." data-en="Included in all rooms. Artisanal regional products prepared every morning in our fireplace dining room.">Incluido en todas las habitaciones. Productos artesanales de la región preparados cada mañana en nuestro comedor con chimenea.</p>
-  </div>
-
-  <!-- 4 tarjetas horizontales -->
-  <div class="reveal" style="display:grid; grid-template-columns:repeat(4,1fr); max-width:1100px; margin:0 auto; padding:0 3rem 5rem; gap:1px; margin-top:1px;">
-    <div style="background:rgba(255,255,255,0.04); padding:2.2rem 1.8rem; border-top:2px solid #1e5c38; transition:background .3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-      <div style="font-size:1.8rem; margin-bottom:1rem;">🥐</div>
-      <div style="font-family:'Playfair Display',serif; font-size:1rem; color:#fff; margin-bottom:.5rem;" data-es="Panadería artesanal" data-en="Artisan bakery">Panadería artesanal</div>
-      <div style="font-size:.78rem; color:rgba(255,255,255,.55); line-height:1.6;" data-es="Medialunas y facturas frescas de elaboración propia" data-en="Fresh croissants and pastries made in-house">Medialunas y facturas frescas de elaboración propia</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.04); padding:2.2rem 1.8rem; border-top:2px solid #2e8a55; transition:background .3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-      <div style="font-size:1.8rem; margin-bottom:1rem;">🍓</div>
-      <div style="font-family:'Playfair Display',serif; font-size:1rem; color:#fff; margin-bottom:.5rem;" data-es="Mermeladas caseras" data-en="Homemade jams">Mermeladas caseras</div>
-      <div style="font-size:.78rem; color:rgba(255,255,255,.55); line-height:1.6;" data-es="Rosa mosqueta, frutilla y frambuesa patagónica" data-en="Rose hip, wild strawberry and Patagonian raspberry">Rosa mosqueta, frutilla y frambuesa patagónica</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.04); padding:2.2rem 1.8rem; border-top:2px solid #1e5c38; transition:background .3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-      <div style="font-size:1.8rem; margin-bottom:1rem;">🧀</div>
-      <div style="font-family:'Playfair Display',serif; font-size:1rem; color:#fff; margin-bottom:.5rem;" data-es="Quesos y fiambres" data-en="Cheese & cold cuts">Quesos y fiambres</div>
-      <div style="font-size:.78rem; color:rgba(255,255,255,.55); line-height:1.6;" data-es="Selección artesanal de productores de la región andina" data-en="Artisan selection from Andean regional producers">Selección artesanal de productores de la región andina</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.04); padding:2.2rem 1.8rem; border-top:2px solid #2e8a55; transition:background .3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-      <div style="font-size:1.8rem; margin-bottom:1rem;">☕</div>
-      <div style="font-family:'Playfair Display',serif; font-size:1rem; color:#fff; margin-bottom:.5rem;" data-es="Café e infusiones" data-en="Coffee & drinks">Café e infusiones</div>
-      <div style="font-size:.78rem; color:rgba(255,255,255,.55); line-height:1.6;" data-es="Café de especialidad, té de hierbas y jugo natural" data-en="Specialty coffee, herbal tea and natural juice">Café de especialidad, té de hierbas y jugo natural</div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
-<section class="amenities" id="servicios">
-  <div class="amenities-header reveal">
-    <p class="eyebrow">Servicios</p>
-    <h2 class="h2">Todo lo que<br /><em>necesitás</em></h2>
-  </div>
-  <div class="amenities-grid reveal">
-    <div class="amenity"><span class="amenity-icon">📶</span><div class="amenity-name">Wi-Fi</div><div class="amenity-desc">Conexión de alta velocidad en todas las áreas</div></div>
-    <div class="amenity"><span class="amenity-icon">🚗</span><div class="amenity-name">Estacionamiento</div><div class="amenity-desc">Parking privado y seguro incluido</div></div>
-    <div class="amenity"><span class="amenity-icon">✈️</span><div class="amenity-name">Traslados</div><div class="amenity-desc">Shuttle al aeropuerto bajo consulta</div></div>
-    <div class="amenity"><span class="amenity-icon">🗺️</span><div class="amenity-name">Turismo</div><div class="amenity-desc">Asesoramiento y organización de excursiones</div></div>
-    <div class="amenity"><span class="amenity-icon">🧺</span><div class="amenity-name">Lavandería</div><div class="amenity-desc">Servicio disponible para estadías largas</div></div>
-    <div class="amenity"><span class="amenity-icon">🧹</span><div class="amenity-name">Limpieza diaria</div><div class="amenity-desc">Servicio de mucama todos los días</div></div>
-    <div class="amenity"><span class="amenity-icon">🎲</span><div class="amenity-name">Zona familiar</div><div class="amenity-desc">Área de juegos interior y exterior</div></div>
-    <div class="amenity"><span class="amenity-icon">🌿</span><div class="amenity-name">Jardín & Terraza</div><div class="amenity-desc">Espacios al aire libre para relajarse</div></div>
-  </div>
-</section>
-
-<!-- UBICACIÓN -->
-<section class="location" id="ubicacion">
-  <div class="location-map reveal-l">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2861.4!2d-71.5614087!3d-41.0418876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96109fd21bc3fec1%3A0x8b795a99d210243d!2sTres%20Amapolas%20Bariloche!5e0!3m2!1ses!2sar!4v1"
-      allowfullscreen="" loading="lazy" title="Ubicación Tres Amapolas">
-    </iframe>
-  </div>
-  <div class="location-content reveal-r">
-    <p class="eyebrow">Ubicación</p>
-    <h2 class="h2">En el corazón<br />de la <em>Patagonia</em></h2>
-    <div class="rule"><div class="rule-line"></div><div class="rule-dot"></div></div>
-    <p class="body-text">San Carlos de Bariloche, rodeados de bosques y a pasos de las principales atracciones naturales de la región.</p>
-    <div class="location-items">
-      <div class="location-item"><div class="location-dist">300m</div><div><div class="location-name">Parque Nacional Nahuel Huapi</div><div class="location-sub">El parque más antiguo de Argentina</div></div></div>
-      <div class="location-item"><div class="location-dist">10 min</div><div><div class="location-name">Cerro Llao Llao</div><div class="location-sub">Senderismo y vistas panorámicas</div></div></div>
-      <div class="location-item"><div class="location-dist">10 min</div><div><div class="location-name">Circuito Chico</div><div class="location-sub">El circuito turístico más emblemático</div></div></div>
-      <div class="location-item"><div class="location-dist">3.6 km</div><div><div class="location-name">Puerto Pañuelo</div><div class="location-sub">Embarcaciones al lago Nahuel Huapi</div></div></div>
-    </div>
-    <div class="location-address">
-      <p><strong>📍 San Carlos de Bariloche</strong>Río Negro · Patagonia, Argentina<br />
-      Dos propiedades: Bariloche centro · Zona Llao Llao</p>
-    </div>
-    <a href="https://maps.google.com/?q=Tres+Amapolas+Bariloche" target="_blank" rel="noopener"
-       class="btn btn-amber" style="display:inline-block;margin-top:1.8rem">
-      Abrir en Google Maps
-    </a>
-  </div>
-</section>
-
 <!-- RESERVAS -->
-<section class="reservas" id="reservas">
-  <div class="reservas-info reveal-l">
-    <p class="eyebrow">Contacto</p>
-    <h2 class="h2">Planificá tu<br /><em>estadía</em></h2>
-    <div class="rule"><div class="rule-line"></div><div class="rule-dot"></div></div>
-    <p class="body-text">Contactanos directamente o reservá por las plataformas de tu preferencia. Te atendemos con gusto para hacer de tu visita una experiencia inolvidable.</p>
-    <div class="contact-items">
-      <div class="contact-item">
-        <div class="contact-icon">📸</div>
-        <div class="contact-text">
-          <h4>Instagram</h4>
-          <a href="https://www.instagram.com/tresamapolas.bariloche/" target="_blank" rel="noopener">@tresamapolas.bariloche</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📍</div>
-        <div class="contact-text">
-          <h4>Ubicación</h4>
-          <p>San Carlos de Bariloche, Río Negro<br />Patagonia, Argentina</p>
-        </div>
-      </div>
+<section style="padding:80px 0 0;background:var(--bg)" id="reservas">
+  <div class="reservas">
+    <div class="reservas-info">
+      <p class="section-label" data-es="Reservá tu estadía" data-en="Book your stay">Reservá tu estadía</p>
+      <h2 class="section-title" data-es="Hacé tu reserva" data-en="Make your booking">Hacé tu reserva</h2>
+      <p class="section-text" data-es="Elegí la plataforma de tu preferencia para ver disponibilidad y confirmar tu reserva con total seguridad." data-en="Choose your preferred platform to check availability and confirm your reservation with complete security.">Elegí la plataforma de tu preferencia para ver disponibilidad y confirmar tu reserva con total seguridad.</p>
+      <ul class="contact-list">
+        <li><span class="icon">📍</span><span data-es="San Carlos de Bariloche, Río Negro, Argentina" data-en="San Carlos de Bariloche, Río Negro, Argentina">San Carlos de Bariloche, Río Negro, Argentina</span></li>
+        <li><span class="icon">✉️</span><span>airmateai@gmail.com</span></li>
+        <li><span class="icon">🏔️</span><span data-es="A 5 min del centro de Bariloche" data-en="5 min from Bariloche center">A 5 min del centro de Bariloche</span></li>
+      </ul>
     </div>
-    <div class="schedule">
-      <div class="schedule-row"><span>Check-in</span><span>16:00 – 19:00 hs</span></div>
-      <div class="schedule-row"><span>Check-out</span><span>08:00 – 11:00 hs</span></div>
-      <div class="schedule-row"><span>Desayuno</span><span>Incluido · Todas las mañanas</span></div>
-      <div class="schedule-row"><span>Desde</span><span>$70 USD / €56 por noche</span></div>
+    <div class="reservas-platforms reveal-r" style="background:#1e5c38;">
+      <p style="color:#a8d5bc;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-bottom:8px;" data-es="Plataformas" data-en="Platforms">Plataformas</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;color:#ffffff;margin-bottom:28px;" data-es="Reservar ahora" data-en="Book Now">Reservar ahora</h3>
+      <a href="https://www.booking.com/searchresults.html?ss=Tres+Amapolas+Bariloche" target="_blank" class="platform-link">
+        <span class="p-icon">🏨</span>
+        <div class="p-text" style="color:#ffffff;">
+          <strong style="color:#ffffff;">Booking.com</strong>
+          <span style="color:rgba(255,255,255,0.65);" data-es="Reserva segura y flexible" data-en="Safe and flexible booking">Reserva segura y flexible</span>
+        </div>
+        <span class="p-arrow" style="color:#ffffff;">→</span>
+      </a>
+      <a href="https://www.airbnb.com/s/Bariloche--Argentina/homes?query=Tres%20Amapolas" target="_blank" class="platform-link">
+        <span class="p-icon">🏠</span>
+        <div class="p-text" style="color:#ffffff;">
+          <strong style="color:#ffffff;">Airbnb</strong>
+          <span style="color:rgba(255,255,255,0.65);" data-es="Experiencia única garantizada" data-en="Unique experience guaranteed">Experiencia única garantizada</span>
+        </div>
+        <span class="p-arrow" style="color:#ffffff;">→</span>
+      </a>
     </div>
-  </div>
-
-  <div class="reservas-platforms reveal-r" style="background:#1e5c38;">
-    <p style="font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:#a8d5bc;margin-bottom:.8rem;font-weight:400;" data-es="Plataformas" data-en="Platforms">Plataformas</p>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:400;line-height:1.15;color:#ffffff;margin-bottom:2.5rem;" data-es="Reservar <em style='color:#a8d5bc;font-style:italic'>online</em>" data-en="Book <em style='color:#a8d5bc;font-style:italic'>online</em>">Reservar <em style="color:#a8d5bc;font-style:italic">online</em></h2>
-
-    <a href="https://www.booking.com/hotel/ar/tres-amapolas-bariloche-bariloche.es.html"
-       target="_blank" rel="noopener"
-       style="display:flex;align-items:center;gap:1.5rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.2);margin-bottom:.8rem;text-decoration:none;transition:all .3s;background:rgba(255,255,255,0.06);"
-       onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.borderColor='rgba(255,255,255,0.6)';this.style.transform='translateX(5px)'"
-       onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.2)';this.style.transform='translateX(0)'">
-      <div style="background:#003580;color:white;padding:.55rem 1rem;border-radius:3px;flex-shrink:0;font-weight:700;font-size:.85rem;">booking<span style="color:#FFD700">.com</span></div>
-      <div>
-        <div style="color:#ffffff;font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.2rem;" data-es="Booking.com" data-en="Booking.com">Booking.com</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:.72rem;" data-es="Confirmación inmediata · Cancelación flexible" data-en="Instant confirmation · Free cancellation">Confirmación inmediata · Cancelación flexible</div>
-      </div>
-      <div style="margin-left:auto;color:rgba(255,255,255,0.8);font-size:1.1rem;">→</div>
-    </a>
-
-    <a href="https://www.airbnb.es/rooms/1506152486537433153"
-       target="_blank" rel="noopener"
-       style="display:flex;align-items:center;gap:1.5rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.2);margin-bottom:.8rem;text-decoration:none;transition:all .3s;background:rgba(255,255,255,0.06);"
-       onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.borderColor='rgba(255,255,255,0.6)';this.style.transform='translateX(5px)'"
-       onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.2)';this.style.transform='translateX(0)'">
-      <div style="background:#FF5A5F;color:white;padding:.55rem 1rem;border-radius:3px;flex-shrink:0;font-weight:700;font-size:.85rem;">Airbnb</div>
-      <div>
-        <div style="color:#ffffff;font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.2rem;" data-es="Airbnb" data-en="Airbnb">Airbnb</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:.72rem;" data-es="Pagos seguros · Soporte 24/7" data-en="Secure payments · 24/7 support">Pagos seguros · Soporte 24/7</div>
-      </div>
-      <div style="margin-left:auto;color:rgba(255,255,255,0.8);font-size:1.1rem;">→</div>
-    </a>
-
-    <a href="https://www.instagram.com/tresamapolas.bariloche/"
-       target="_blank" rel="noopener"
-       style="display:flex;align-items:center;gap:1.5rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.2);text-decoration:none;transition:all .3s;background:rgba(255,255,255,0.06);"
-       onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.borderColor='rgba(255,255,255,0.6)';this.style.transform='translateX(5px)'"
-       onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.2)';this.style.transform='translateX(0)'">
-      <div style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);color:white;padding:.55rem 1rem;border-radius:3px;flex-shrink:0;font-weight:700;font-size:.85rem;">Instagram</div>
-      <div>
-        <div style="color:#ffffff;font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.2rem;" data-es="Consulta directa" data-en="Direct inquiry">Consulta directa</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:.72rem;" data-es="@tresamapolas.bariloche · Respuesta rápida" data-en="@tresamapolas.bariloche · Quick response">@tresamapolas.bariloche · Respuesta rápida</div>
-      </div>
-      <div style="margin-left:auto;color:rgba(255,255,255,0.8);font-size:1.1rem;">→</div>
-    </a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-top">
-    <div>
-      <div class="footer-brand-logo">
-        <img src="../cf4611b5-51c9-4fa1-b4a5-7b64b416d479-removebg-preview.png" alt="Tres Amapolas" />
-        <div class="footer-brand-name">Tres Amapolas<small>Bed &amp; Breakfast</small></div>
-      </div>
-      <p class="footer-tagline">"Un refugio de naturaleza, calidez y sabores artesanales en el corazón de la Patagonia."</p>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/tresamapolas.bariloche/" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-      </div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Tres Amapolas">
+      <p data-es="Bed &amp; Breakfast boutique en el corazón de la Patagonia andina. Un refugio íntimo entre bosques, montañas y el lago Nahuel Huapi." data-en="Boutique Bed &amp; Breakfast in the heart of the Andean Patagonia. An intimate refuge among forests, mountains and Lake Nahuel Huapi.">Bed &amp; Breakfast boutique en el corazón de la Patagonia andina. Un refugio íntimo entre bosques, montañas y el lago Nahuel Huapi.</p>
     </div>
     <div class="footer-col">
-      <h5>Explorar</h5>
+      <h5 data-es="Navegación" data-en="Navigation">Navegación</h5>
       <ul>
-        <li><a href="#nosotros">Nuestra historia</a></li>
-        <li><a href="#habitaciones">Habitaciones</a></li>
-        <li><a href="#desayuno">Desayuno</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="#nosotros" data-es="Nosotros" data-en="About us">Nosotros</a></li>
+        <li><a href="#habitaciones" data-es="Habitaciones" data-en="Rooms">Habitaciones</a></li>
+        <li><a href="#desayuno" data-es="Desayuno" data-en="Breakfast">Desayuno</a></li>
+        <li><a href="#entorno" data-es="Entorno" data-en="Surroundings">Entorno</a></li>
+        <li><a href="#reservas" data-es="Reservar" data-en="Book Now">Reservar</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>La región</h5>
+      <h5 data-es="Contacto" data-en="Contact">Contacto</h5>
       <ul>
-        <li><a href="#">Parque Nahuel Huapi</a></li>
-        <li><a href="#">Circuito Chico</a></li>
-        <li><a href="#">Cerro Llao Llao</a></li>
-        <li><a href="#">Puerto Pañuelo</a></li>
-        <li><a href="#">Actividades</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Reservas</h5>
-      <ul>
-        <li><a href="https://www.booking.com/hotel/ar/tres-amapolas-bariloche-bariloche.es.html" target="_blank">Booking.com</a></li>
-        <li><a href="https://www.airbnb.es/rooms/1506152486537433153" target="_blank">Airbnb</a></li>
-        <li><a href="https://www.instagram.com/tresamapolas.bariloche/" target="_blank">Instagram</a></li>
-        <li><a href="#">Check-in 16:00–19:00</a></li>
-        <li><a href="#">Check-out 08:00–11:00</a></li>
+        <li data-es="San Carlos de Bariloche" data-en="San Carlos de Bariloche">San Carlos de Bariloche</li>
+        <li data-es="Río Negro, Argentina" data-en="Río Negro, Argentina">Río Negro, Argentina</li>
+        <li>airmateai@gmail.com</li>
+        <li><a href="https://www.booking.com/searchresults.html?ss=Tres+Amapolas+Bariloche" target="_blank">Booking.com</a></li>
+        <li><a href="https://www.airbnb.com/s/Bariloche--Argentina/homes?query=Tres%20Amapolas" target="_blank">Airbnb</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Tres Amapolas Bed &amp; Breakfast · San Carlos de Bariloche, Patagonia, Argentina</p>
-    <div class="footer-legal">
-      <a href="#">Privacidad</a>
-      <a href="#">Términos</a>
-      <a href="#">Cancelaciones</a>
-    </div>
-  </div>
+  <hr class="footer-divider">
+  <p class="footer-copy" data-es="© 2024 Tres Amapolas Bed &amp; Breakfast · Bariloche, Patagonia · Todos los derechos reservados" data-en="© 2024 Tres Amapolas Bed &amp; Breakfast · Bariloche, Patagonia · All rights reserved">© 2024 Tres Amapolas Bed &amp; Breakfast · Bariloche, Patagonia · Todos los derechos reservados</p>
 </footer>
 
-<!-- FLOAT BTN -->
-<a href="#reservas" class="float-btn" id="floatBtn">Reservar</a>
-
 <script>
-  // Nav scroll
-  const nav = document.getElementById('nav');
-  const floatBtn = document.getElementById('floatBtn');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-    floatBtn.classList.toggle('show', window.scrollY > 400);
+// NAV scroll effect
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('revealed'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-r').forEach(el => observer.observe(el));
+
+// Language toggle
+let lang = 'es';
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val) el.innerHTML = val;
   });
-
-  // Hero image load
-  const heroImg = document.getElementById('heroImg');
-  heroImg.addEventListener('load', () => heroImg.classList.add('loaded'));
-  if (heroImg.complete) heroImg.classList.add('loaded');
-
-  // Reveal
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => obs.observe(el));
-
-  // Stagger amenities
-  document.querySelectorAll('.amenities-grid .amenity').forEach((el, i) => {
-    el.style.transitionDelay = `${i * 0.06}s`;
-  });
-
-  // Mobile nav
-  function toggleMenu() {
-    const ul = document.querySelector('.nav-links');
-    const open = ul.style.display === 'flex';
-    ul.style.cssText = open ? '' : `
-      display:flex; flex-direction:column;
-      position:fixed; top:65px; left:0; right:0;
-      background:rgba(22,18,15,.97); padding:2rem 1.5rem;
-      gap:1.6rem; z-index:99; border-top:1px solid rgba(240,232,219,.08);
-    `;
-  }
-  document.querySelectorAll('.nav-links a').forEach(a =>
-    a.addEventListener('click', () => document.querySelector('.nav-links').style.cssText = '')
-  );
-
-  // Language toggle
-  let currentLang = 'es';
-  const translations = {
-    es: {
-      title: 'Tres Amapolas — Bed & Breakfast · Bariloche, Patagonia',
-      heroTag: 'San Carlos de Bariloche · Patagonia, Argentina',
-      heroDesc: 'Un refugio alpino en el corazón de la Patagonia. Nueve habitaciones con historia, desayuno artesanal y el Parque Nacional Nahuel Huapi a 300 metros.',
-      heroBtn1: 'Reservar ahora', heroBtn2: 'Conocer más',
-      aboutEye: 'Nuestra historia', aboutH: 'Un chalé alpino <em>único</em> en Bariloche',
-      aboutBody: 'Tres Amapolas Bed & Breakfast nació del deseo de compartir la belleza natural de la Patagonia argentina desde un espacio íntimo y cálido. Nuestra propiedad combina la arquitectura de chalé típica de Bariloche con el confort moderno, rodeada de bosques nativos y a pasos del Parque Nacional Nahuel Huapi.',
-      aboutQ: '"Cada rincón de Tres Amapolas fue pensado para que te sientas en casa, lejos de casa."',
-      roomsEye: 'Alojamiento', roomsH: 'Nuestras <em>habitaciones</em>', roomsBtn: 'Ver disponibilidad →',
-      servEye: 'Servicios', servH: 'Todo lo que <em>necesitás</em>',
-      locEye: 'Ubicación', locH: 'En el corazón de la <em>Patagonia</em>',
-      locBody: 'San Carlos de Bariloche, rodeados de bosques y a pasos de las principales atracciones naturales de la región.',
-      locBtn: 'Abrir en Google Maps',
-      resEye: 'Contacto', resH: 'Planificá tu <em>estadía</em>',
-      resBody: 'Contactanos directamente o reservá por las plataformas de tu preferencia.',
-      floatBtn: 'Reservar'
-    },
-    en: {
-      title: 'Tres Amapolas — Bed & Breakfast · Bariloche, Patagonia',
-      heroTag: 'San Carlos de Bariloche · Patagonia, Argentina',
-      heroDesc: 'An alpine retreat in the heart of Patagonia. Nine charming rooms, artisan breakfast, and Nahuel Huapi National Park just 300 metres away.',
-      heroBtn1: 'Book now', heroBtn2: 'Learn more',
-      aboutEye: 'Our story', aboutH: 'A unique alpine <em>chalet</em> in Bariloche',
-      aboutBody: 'Tres Amapolas Bed & Breakfast was born from a desire to share the natural beauty of Argentine Patagonia from an intimate, warm space. Our property blends Bariloche\'s classic chalet architecture with modern comfort, surrounded by native forests and steps from Nahuel Huapi National Park.',
-      aboutQ: '"Every corner of Tres Amapolas was designed to make you feel at home, away from home."',
-      roomsEye: 'Accommodation', roomsH: 'Our <em>rooms</em>', roomsBtn: 'Check availability →',
-      servEye: 'Services', servH: 'Everything you <em>need</em>',
-      locEye: 'Location', locH: 'In the heart of <em>Patagonia</em>',
-      locBody: 'San Carlos de Bariloche, surrounded by forests and steps from the region\'s main natural attractions.',
-      locBtn: 'Open in Google Maps',
-      resEye: 'Contact', resH: 'Plan your <em>stay</em>',
-      resBody: 'Contact us directly or book through your preferred platform.',
-      floatBtn: 'Book'
-    }
-  };
-
-  function toggleLang() {
-    currentLang = currentLang === 'es' ? 'en' : 'es';
-    const btn = document.getElementById('langBtn');
-    btn.textContent = currentLang === 'es' ? 'EN' : 'ES';
-    document.documentElement.lang = currentLang;
-
-    // swap all data-es / data-en elements
-    document.querySelectorAll('[data-es]').forEach(el => {
-      const txt = el.getAttribute('data-' + currentLang);
-      if (txt) el.innerHTML = txt;
-    });
-
-    // swap float btn
-    document.getElementById('floatBtn').textContent = translations[currentLang].floatBtn;
-    document.title = translations[currentLang].title;
-
-    // responsive grid label for desayuno
-    const desayunoGrid = document.querySelector('#desayuno [style*="grid-template-columns:repeat(4"]');
-    if (desayunoGrid && window.innerWidth < 640) {
-      desayunoGrid.style.gridTemplateColumns = '1fr 1fr';
-    }
-  }
+}
 </script>
 </body>
 </html>
